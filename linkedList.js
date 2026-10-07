@@ -51,7 +51,7 @@ export class linkedList {
     if (index < 0 || !Number.isInteger(index)) return undefined;
     let currentNode = this.headNode;
     let count = 0;
-    while (currentNode.nextNode !== null && count <= index) {
+    while (currentNode !== null && count < index) {
       currentNode = currentNode.nextNode;
       count++;
     }
@@ -61,8 +61,9 @@ export class linkedList {
     if (this.headNode === null) {
       return undefined;
     } else {
-      let newHeadNode = this.headNode.nextNode;
-      this.headNode = newHeadNode;
+      let oldHeadNodeValue = this.headNode.value;
+      this.headNode = this.headNode.nextNode;
+      return oldHeadNodeValue;
     }
   }
   contains(value) {
@@ -76,7 +77,7 @@ export class linkedList {
     }
     return false;
   }
-  findIndexvalue(value) {
+  findIndex(value) {
     let index = 0;
     let currentNode = this.headNode;
     while (currentNode !== null) {
@@ -87,6 +88,6 @@ export class linkedList {
       }
       index++;
     }
-    return currentNode === null ? -1 : index;
+    return -1;
   }
 }
