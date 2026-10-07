@@ -108,6 +108,14 @@ export class linkedList {
     if (!Number.isInteger(index) || index < 0 || index > this.size()) {
       throw new RangeError("index out of bounds");
     }
+    if (index === 0) {
+      //use .reverse() to ensure values are in the correct order
+      //since prepend adds to the front
+      for (const value of [...values].reverse) {
+        this.prepend(value);
+      }
+      return;
+    }
     let currentNode = this.headNode;
     let count = 0;
     while (currentNode !== null && count < index - 1) {
@@ -119,15 +127,6 @@ export class linkedList {
       node.nextNode = currentNode.nextNode;
       currentNode.nextNode = node;
       currentNode = node;
-    }
-    if (index === 0 || this.headNode === null) {
-      currentNode = this.headNode;
-      for (let i = 1; i < values.length; i++) {
-        const node = new Node(values[i]);
-        node.nextNode = currentNode.nextNode;
-        currentNode.nextNode = node;
-        currentNode = node;
-      }
     }
   }
   removeAt(index) {
