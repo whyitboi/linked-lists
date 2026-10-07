@@ -1,2 +1,2 @@
 import { linkedList } from "./linkedList";
-const doBe = new Date();
+const testList = new linkedList();
