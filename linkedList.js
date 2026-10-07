@@ -109,8 +109,8 @@ export class linkedList {
       throw new RangeError("index out of bounds");
     }
     let currentNode = this.headNode;
-    count = 0;
-    while (currentNode !== null && this.size() < index - 1) {
+    let count = 0;
+    while (currentNode !== null && count < index - 1) {
       count++;
       currentNode = currentNode.nextNode;
     }
@@ -122,8 +122,8 @@ export class linkedList {
     }
     if (index === 0 || this.headNode === null) {
       currentNode = this.headNode;
-      for (const value of values) {
-        const node = new Node(value);
+      for (let i = 1; i < values.length; i++) {
+        const node = new Node(values[i]);
         node.nextNode = currentNode.nextNode;
         currentNode.nextNode = node;
         currentNode = node;
@@ -131,8 +131,12 @@ export class linkedList {
     }
   }
   removeAt(index) {
-    if (!Number.isInteger(index) || index < 0 || index > this.size()) {
+    if (!Number.isInteger(index) || index < 0 || index >= this.size()) {
       throw new RangeError("index out of bounds");
+    }
+    if (index === 0) {
+      this.headNode = this.headNode.nextNode;
+      return;
     }
     let currentNode = this.headNode;
     let count = 0;
