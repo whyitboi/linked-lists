@@ -3,7 +3,4 @@ export class Node {
     this.value = value;
     this.nextNode = null;
   }
-  set nextNode(nextNode) {
-    this.nextNode = nextNode;
-  }
 }

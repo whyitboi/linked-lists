@@ -1,27 +1,21 @@
 import { Node } from "./node";
 
 export class linkedList {
-  constructor(name) {
-    this.linkedList = [];
-    this.name = name;
+  constructor() {
+    this.headNode = null;
   }
   append(value) {
     const node = new Node(value);
-    //set the other property of node here
-    this.linkedList.push(node);
+    if (this.headNode === null) {
+      this.headNode = node;
+    }
+    node.nextNode = this.headNode;
+    this.headNode = node;
+    // this.headNode === null ? this.headNode = node :
   }
   prepend(value) {
     const node = new Node(value);
-    node.nextNode(this.linkedList[0]);
-    this.linkedList.unshift(node);
   }
-  size() {
-    return this.linkedList.length;
-  }
-  head() {
-    return this.linkedList.length;
-    // if(this.linkedList.length <= 0){
-    //     return undefined
-    // }
-  }
+  size() {}
+  head() {}
 }
