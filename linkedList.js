@@ -1,4 +1,4 @@
-import { Node } from "./node";
+import { Node } from "./node.js";
 
 export class linkedList {
   constructor() {
@@ -91,13 +91,13 @@ export class linkedList {
     return -1;
   }
   toString() {
-    let listString = " ";
+    let listString = "";
     if (this.headNode === null) {
       return listString;
     } else {
       let currentNode = this.headNode;
       while (currentNode !== null) {
-        listString += `(${currentNode.value}) -> `;
+        listString += `( ${currentNode.value} ) -> `;
         currentNode = currentNode.nextNode;
       }
     }
@@ -109,7 +109,9 @@ export class linkedList {
       throw new RangeError("index out of bounds");
     }
     let currentNode = this.headNode;
-    while (currentNode !== null && count < index) {
+    count = 0;
+    while (currentNode !== null && this.size() < index - 1) {
+      count++;
       currentNode = currentNode.nextNode;
     }
     for (const value of values) {
@@ -118,5 +120,27 @@ export class linkedList {
       currentNode.nextNode = node;
       currentNode = node;
     }
+    if (index === 0 || this.headNode === null) {
+      currentNode = this.headNode;
+      for (const value of values) {
+        const node = new Node(value);
+        node.nextNode = currentNode.nextNode;
+        currentNode.nextNode = node;
+        currentNode = node;
+      }
+    }
+  }
+  removeAt(index) {
+    if (!Number.isInteger(index) || index < 0 || index > this.size()) {
+      throw new RangeError("index out of bounds");
+    }
+    let currentNode = this.headNode;
+    let count = 0;
+    while (currentNode !== null && count < index - 1) {
+      count++;
+      currentNode = currentNode.nextNode;
+    }
+    let nodeToDelete = currentNode.nextNode;
+    currentNode.nextNode = nodeToDelete.nextNode;
   }
 }
