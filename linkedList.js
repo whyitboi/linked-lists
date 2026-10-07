@@ -24,11 +24,10 @@ export class linkedList {
   }
   size() {
     let size = 0;
-    if (this.headNode === null) return size;
     let currentNode = this.headNode;
-    while (currentNode.nextNode != null) {
-      currentNode = currentNode.nextNode;
+    while (currentNode !== null) {
       size++;
+      currentNode = currentNode.nextNode;
     }
     return size;
   }
@@ -49,13 +48,45 @@ export class linkedList {
     }
   }
   at(index) {
-    if (index < 0 || !Number.isInteger(index) || this.headNode === null) return;
+    if (index < 0 || !Number.isInteger(index)) return undefined;
     let currentNode = this.headNode;
     let count = 0;
     while (currentNode.nextNode !== null && count <= index) {
       currentNode = currentNode.nextNode;
       count++;
     }
-    return currentNode.value;
+    return currentNode === null ? undefined : currentNode.value;
+  }
+  pop() {
+    if (this.headNode === null) {
+      return undefined;
+    } else {
+      let newHeadNode = this.headNode.nextNode;
+      this.headNode = newHeadNode;
+    }
+  }
+  contains(value) {
+    let currentNode = this.headNode;
+    while (currentNode !== null) {
+      if (currentNode.value !== value) {
+        currentNode = currentNode.nextNode;
+      } else {
+        return true;
+      }
+    }
+    return false;
+  }
+  findIndexvalue(value) {
+    let index = 0;
+    let currentNode = this.headNode;
+    while (currentNode !== null) {
+      if (currentNode.value !== value) {
+        currentNode = currentNode.nextNode;
+      } else {
+        return index;
+      }
+      index++;
+    }
+    return currentNode === null ? -1 : index;
   }
 }
