@@ -111,7 +111,7 @@ export class linkedList {
     if (index === 0) {
       //use .reverse() to ensure values are in the correct order
       //since prepend adds to the front
-      for (const value of [...values].reverse) {
+      for (const value of [...values].reverse()) {
         this.prepend(value);
       }
       return;
